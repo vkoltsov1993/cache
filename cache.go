@@ -15,9 +15,9 @@ func New() *Cache {
 	}
 }
 
-func (cache *Cache) Set(key string, value interface{}) error {
+func (cache *Cache) Set(key string, value interface{}, force bool) error {
 	_, exists := cache.cacheMap[key]
-	if exists {
+	if exists && force == false {
 		errorMessage := fmt.Sprintf("%s key has been already added to cache", key)
 		return errors.New(errorMessage)
 	}
