@@ -1,10 +1,5 @@
 package cache
 
-import (
-	"errors"
-	"fmt"
-)
-
 type Cache struct {
 	cacheMap map[string]interface{}
 }
@@ -15,14 +10,8 @@ func New() *Cache {
 	}
 }
 
-func (cache *Cache) Set(key string, value interface{}, force bool) error {
-	_, exists := cache.cacheMap[key]
-	if exists && force == false {
-		errorMessage := fmt.Sprintf("%s key has been already added to cache", key)
-		return errors.New(errorMessage)
-	}
+func (cache *Cache) Set(key string, value interface{}) {
 	cache.cacheMap[key] = value
-	return nil
 }
 
 func (cache Cache) Get(key string) interface{} {
